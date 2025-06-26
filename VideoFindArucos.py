@@ -94,7 +94,7 @@ def draw_gaze_points_and_aruco_on_video(video_path, gaze_data, Video_Time, camer
         if not ret:
             break
         
-        frame = cv2.undistort(frame, camera_matrix, dist_coeffs)
+        # frame = cv2.undistort(frame, camera_matrix, dist_coeffs)
         
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         corners, ids, _ = aruco.detectMarkers(gray, aruco_dict, parameters=aruco_params)
@@ -122,15 +122,15 @@ def draw_gaze_points_and_aruco_on_video(video_path, gaze_data, Video_Time, camer
         gaze_x = int(gaze_data["gaze x [px]"].iloc[closest_index])
         gaze_y = int(gaze_data["gaze y [px]"].iloc[closest_index])
 
-        pt = np.array([[[gaze_x, gaze_y]]], dtype=np.float32)
+        # pt = np.array([[[gaze_x, gaze_y]]], dtype=np.float32)
 
-        # undistortPoints maps it into normalized coordinates; by providing
-        # P=camera_matrix we ask for pixel output in the undistorted image:
-        undist_pt = cv2.undistortPoints(pt, camera_matrix, dist_coeffs, P=camera_matrix)
+        # # undistortPoints maps it into normalized coordinates; by providing
+        # # P=camera_matrix we ask for pixel output in the undistorted image:
+        # undist_pt = cv2.undistortPoints(pt, camera_matrix, dist_coeffs, P=camera_matrix)
 
-        # Extract back to ints
-        ux, uy  = undist_pt[0,0]
-        gaze_x, gaze_y = int(round(ux)), int(round(uy))
+        # # Extract back to ints
+        # ux, uy  = undist_pt[0,0]
+        # gaze_x, gaze_y = int(round(ux)), int(round(uy))
 
         # start building this row
         row = [target_value, elapsed_time, gaze_x, gaze_y]
@@ -196,7 +196,7 @@ def draw_gaze_points_and_aruco_on_video(video_path, gaze_data, Video_Time, camer
     # cv2.destroyAllWindows()
 
 if __name__ == "__main__":
-    path = '/Volumes/R@mtin/Year 2/Experiment/EyeTracker/Data'
+    path = "/media/cgdesktop01/R@mtin/Year 2/Experiment/EyeTracker/Data"
 
     folders_Paricipants = [name for name in os.listdir(path)
     if os.path.isdir(os.path.join(path, name)) and name.startswith('Participant')]
@@ -228,7 +228,9 @@ if __name__ == "__main__":
         camera_matrix        = np.array(data['camera_matrix'])
         distortion_coefficients    = np.array(data['distortion_coefficients'])
 
-        draw_gaze_points_and_aruco_on_video(video_path, Gaze_data, Video_Time_file_data, camera_matrix, distortion_coefficients, out_csv='/Users/stabatabaeim/Library/CloudStorage/OneDrive-TheUniversityofMelbourne/University/Year 2/Experiment/EyeTracker/Data/Participant 10/Video_Gaze_Aruco.csv')
+        out_csv = main_path + "/"+ "Video_Gaze_Aruco.csv"
+
+        draw_gaze_points_and_aruco_on_video(video_path, Gaze_data, Video_Time_file_data, camera_matrix, distortion_coefficients, out_csv)
 
 
 
