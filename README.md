@@ -17,5 +17,14 @@ For each participant I have 14 files.
 
 7. scene_camera.json this is a file which i didnt used in my analysis, but there i have camera matrix.
 
-8. 
+8. Video_Gaze_Aruco.csv which is a file containing timestamp_ns, Video_time, gaze_x_px, gaze_y_px, aruco_1_id, aruco_1_x_px, aruco_1_y_px.
+
+9. Video_Timestamp.csv which there i have a timestamp for each frame of the video.
+
+So to start analysing, first we need to have the timestamp file for the each video (by knowing the exact timestamp of the first frame of the video we can also do the analysis, because there is a python code that based on the video frame per second can find the timestamp of other frames of the video. it is also important to know the video does not have an exact frame per second.)
+so the first step is to run "FindFrameTimes.py" file.
+
+
+
+
 
